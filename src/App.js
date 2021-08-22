@@ -11,7 +11,7 @@ function App() {
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <a href="/servicos" className="navbar-brand">
+        <a href="/services" className="navbar-brand">
           OnService
         </a>
         <div className="navbar-nav mr-auto">
