@@ -94,12 +94,6 @@ const ServicesList = () => {
           ))}
         </ul>
 
-        // <button
-        //   className="m-3 btn btn-sm btn-danger"
-        //   onClick={removeAllServices}
-        // >
-        //   Remover Todos
-        // </button>
       </div>
       <div className="col-md-6">
         {currentService ? (

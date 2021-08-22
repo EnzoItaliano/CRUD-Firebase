@@ -115,12 +115,6 @@ const CitiesList = () => {
           ))}
         </ul>
 
-        // <button
-        //   className="m-3 btn btn-sm btn-danger"
-        //   onClick={removeAllCities}
-        // >
-        //   Remove All
-        // </button>
       </div>
       <div className="col-md-6">
         {currentCity ? (
