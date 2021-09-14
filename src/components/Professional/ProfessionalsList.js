@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import ProfessionalDataService from "../../services/ProfessionalService";
+import CityDataService from "../../services/CitiesService";
+import ServiceDataService from "../../services/ServicesService";
 import Professional from "./Professional";
 
 const ProfessionalsList = () => {
   const [professionals, setProfessionals] = useState([]);
+  const [servicesAvailable, setServicesAvailable] = useState([]);
+  const [citiesAvailable, setCitiesAvailable] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [states, setStates] = useState([]);
   const [currentProfessional, setCurrentProfessional] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [selection, setSelection] = useState("Todas");
@@ -38,11 +44,74 @@ const ProfessionalsList = () => {
     setProfessionals(professionals);
   };
 
+  const retrieveCidades = (items) => {
+    let cidades = [];
+    let estados = [];
+
+    items.forEach((item) => {
+      let key = item.key;
+      let data = item.val();
+      cidades.push({
+        key: key,
+        name: data.name,
+        state: data.state,
+        country: data.country,
+      });
+      estados.push(data.state)
+    });
+
+    cidades.sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    })
+
+    estados.sort(function (a, b) {
+      return a.localeCompare(b);
+    })
+
+    let set = new Set(estados)
+    estados = Array.from(set)
+    setStates(estados)
+    setCitiesAvailable(cidades)
+  }
+
+  const retrieveServicos = (items) => {
+    let servicos = [];
+    let categorias = [];
+
+    items.forEach((item) => {
+      let key = item.key;
+      let data = item.val();
+      servicos.push({
+        key: key,
+        name: data.name,
+        category: data.category,
+      });
+      categorias.push(data.category)
+    });
+
+    servicos.sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    })
+
+    categorias.sort(function (a, b) {
+      return a.localeCompare(b);
+    })
+
+    let set = new Set(categorias)
+    categorias = Array.from(set)
+    setCategories(categorias)
+    setServicesAvailable(servicos)
+  }
+
   useEffect(() => {
     ProfessionalDataService.getAll().on("value", onDataChange);
+    CityDataService.getAll().on("value", retrieveCidades);
+    ServiceDataService.getAll().on("value", retrieveServicos);
 
     return () => {
       ProfessionalDataService.getAll().off("value", onDataChange);
+      CityDataService.getAll().off("value", retrieveCidades);
+      ServiceDataService.getAll().off("value", retrieveServicos);
     };
   }, []);
 
@@ -136,7 +205,7 @@ const ProfessionalsList = () => {
       </div>
       <div className="col-md-6">
         {currentProfessional ? (
-          <Professional professional={currentProfessional} refreshList={refreshList} />
+          <Professional professional={currentProfessional} states={states} cities={citiesAvailable} categories={categories} services={servicesAvailable} refreshList={refreshList} />
         ) : (
           <div>
             <br />

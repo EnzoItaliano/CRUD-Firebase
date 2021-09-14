@@ -11,36 +11,43 @@ import ProfessionalsList from "./components/Professional/ProfessionalsList";
 function App() {
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <a href="/services" className="navbar-brand">
-          OnService
-        </a>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/services"} className="nav-link">
-              Serviços
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/add-service"} className="nav-link">
-              Adicionar Serviço
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/cities"} className="nav-link">
-              Cidades
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/add-city"} className="nav-link">
-              Adicionar Cidade
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/professional"} className="nav-link">
-              Profissionais
-            </Link>
-          </li>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a href="/services" className="navbar-brand">
+            OnService
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li className="nav-item">
+                <Link to={"/services"} className="nav-link">
+                  Serviços
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/add-service"} className="nav-link">
+                  Adicionar Serviço
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/cities"} className="nav-link">
+                  Cidades
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/add-city"} className="nav-link">
+                  Adicionar Cidade
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/professional"} className="nav-link">
+                  Profissionais
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
 
