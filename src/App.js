@@ -6,6 +6,7 @@ import AddService from "./components/Service/AddService";
 import ServicesList from "./components/Service/ServicesList";
 import AddCity from "./components/City/AddCity";
 import CitiesList from "./components/City/CitiesList";
+import ProfessionalsList from "./components/Professional/ProfessionalsList";
 
 function App() {
   return (
@@ -35,6 +36,11 @@ function App() {
               Adicionar Cidade
             </Link>
           </li>
+          <li className="nav-item">
+            <Link to={"/professional"} className="nav-link">
+              Profissionais
+            </Link>
+          </li>
         </div>
       </nav>
 
@@ -45,6 +51,7 @@ function App() {
           <Route exact path="/add-service" component={AddService} />
           <Route exact path="/add-city" component={AddCity} />
           <Route exact path={"/cities"} component={CitiesList} />
+          <Route exact path={"/professional"} component={ProfessionalsList} />
         </Switch>
       </div>
     </div>

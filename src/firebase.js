@@ -1,5 +1,4 @@
 import firebase from "firebase/app";
-require("firebase/database");
 
 let config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -13,4 +12,4 @@ let config = {
 
 firebase.initializeApp(config);
 
-export default firebase.database();
+export default firebase;

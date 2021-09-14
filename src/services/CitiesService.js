@@ -1,6 +1,9 @@
 import firebase from "../firebase";
+import "firebase/database";
 
-const db = firebase.ref("/cidades");
+const database = firebase.database();
+
+const db = database.ref("/cidades");
 
 const getAll = () => {
   return db;

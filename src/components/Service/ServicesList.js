@@ -81,7 +81,7 @@ const ServicesList = () => {
         <ul className="list-group">
           {services
             .filter((service) => {
-              if(service.category == selection || selection == "Todas") return service
+              if(service.category === selection || selection === "Todas") return service
             })
             .map((service, index) => (
             <li

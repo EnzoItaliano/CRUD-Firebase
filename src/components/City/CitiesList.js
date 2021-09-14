@@ -102,7 +102,7 @@ const CitiesList = () => {
         <ul className="list-group">
           {cities
             .filter((city) => {
-              if(city.state == selection || selection == "Todos") return city
+              if(city.state === selection || selection === "Todos") return city
             })
             .map((city, index) => (
             <li
