@@ -18,6 +18,7 @@ const ServicesList = () => {
         key: key,
         name: data.name,
         category: data.category,
+        count: data.count
       });
     });
     services.sort(function (a, b) {
@@ -40,12 +41,13 @@ const ServicesList = () => {
   };
 
   const setActiveService = (service, index) => {
-    const { name, category } = service;
+    const { name, category, count } = service;
 
     setCurrentService({
       key: service.key,
       name,
       category,
+      count,
     });
 
     setCurrentIndex(index);

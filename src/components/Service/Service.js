@@ -5,7 +5,8 @@ const Service = (props) => {
   const initialServiceState = {
     key: null,
     name: "",
-    category: ""
+    category: "",
+    count: ""
   };
   const [currentService, setCurrentService] = useState(initialServiceState);
   const [message, setMessage] = useState("");
@@ -25,6 +26,7 @@ const Service = (props) => {
     const data = {
       name: currentService.name,
       category: currentService.category,
+      count: currentService.count
     };
 
     ServiceDataService.update(currentService.key, data)
@@ -74,7 +76,17 @@ const Service = (props) => {
                 onChange={handleInputChange}
               />
             </div>
-
+            <div className="form-group">
+              <label htmlFor="name">Quantidade</label>
+              <input
+                type="number"
+                className="form-control"
+                id="count"
+                name="count"
+                value={currentService.count}
+                onChange={handleInputChange}
+              />
+            </div>
           </form>
 
           <button className="badge bg-danger mr-2" onClick={deleteService}>
