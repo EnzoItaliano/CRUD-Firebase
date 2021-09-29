@@ -19,7 +19,8 @@ const Professional = (props) => {
     description: "",
     w2w: "",
     terms: "",
-    published: ""
+    highlight: false,
+    published: false
   };
   const [currentProfessional, setCurrentProfessional] = useState(initialProfessionalState);
   const [tempService, setTempService] = useState("");
@@ -34,7 +35,14 @@ const Professional = (props) => {
   
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setCurrentProfessional({ ...currentProfessional, [name]: value });
+    if(name === 'w2w' || name === 'highlight' || name === 'published'){
+      if(value === 'true')
+        setCurrentProfessional({ ...currentProfessional, [name]: true });
+      else
+        setCurrentProfessional({ ...currentProfessional, [name]: false });
+    }else{
+      setCurrentProfessional({ ...currentProfessional, [name]: value });
+    }
   };
 
   const updateProfessional = () => {
@@ -50,6 +58,7 @@ const Professional = (props) => {
       servicos: currentProfessional.servicos,
       description: currentProfessional.description,
       w2w: currentProfessional.w2w,
+      highlight: currentProfessional.highlight,
       published: currentProfessional.published
     };
 
@@ -136,7 +145,7 @@ const Professional = (props) => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="email" class="my-1">Email</label>
+              <label htmlFor="email" class="my-1" disabled>Email</label>
               <input
                 type="text"
                 className="form-control mb-2"
@@ -345,6 +354,14 @@ const Professional = (props) => {
             <div className="form-group">
               <label htmlFor="w2w" class="my-1">W2W</label>
               <select className="form-select mb-2" id="w2w" name="w2w" value={currentProfessional.w2w} onChange={handleInputChange}>
+                <option value={true}>Sim</option>
+                <option value={false}>Não</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="highlight" class="my-1">Destaque</label>
+              <select className="form-select mb-2" id="highlight" name="highlight" value={currentProfessional.highlight} onChange={handleInputChange}>
                 <option value={true}>Sim</option>
                 <option value={false}>Não</option>
               </select>

@@ -12,7 +12,7 @@ const ProfessionalsList = () => {
   const [states, setStates] = useState([]);
   const [currentProfessional, setCurrentProfessional] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const [selection, setSelection] = useState("Todas");
+  const [selection, setSelection] = useState(true);
 
   const onDataChange = (items) => {
     let professionals = [];
@@ -35,6 +35,7 @@ const ProfessionalsList = () => {
         description: data.description,
         w2w: data.w2w,
         terms: data.terms,
+        highlight: data.highlight,
         published: data.published
       });
     });
@@ -121,6 +122,13 @@ const ProfessionalsList = () => {
   };
 
   const setActiveProfessional = (professional, index) => {
+    if(professional.cidades === undefined){
+      professional.cidades = []
+    }
+    if(professional.servicos === undefined){
+      professional.servicos = []
+    }
+    
     const { 
       name,
       picture,
@@ -135,6 +143,7 @@ const ProfessionalsList = () => {
       description,
       w2w,
       terms,
+      highlight,
       published
     } = professional;
 
@@ -153,6 +162,7 @@ const ProfessionalsList = () => {
       description,
       w2w,
       terms,
+      highlight,
       published
     });
 
@@ -173,23 +183,29 @@ const ProfessionalsList = () => {
     <div className="list row">
       <div className="col-md-6">
         <h4>Lista de Profissionais</h4>
-        <select class="form-select" aria-label="Default select example" onChange={(e)=>{setSelection(e.target.value)}}>
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          onChange={(e) => {
+            if(e.target.value === 'true'){
+              setSelection(true)
+            }else{
+              setSelection(false)
+            }
+          }}
+        >
           <option selected hidden>Categorias</option>
-          <option value="Todas">Todas</option>
-          <option value="Beleza">Beleza</option>
-          <option value="Ensino">Ensino</option>
-          <option value="Eventos">Eventos</option>
-          <option value="Manutenção">Manutenção</option>
-          <option value="Outros">Outros</option>
-          <option value="Residencial">Residencial</option>
-          <option value="Saúde">Saúde</option>
-          <option value="Tecnologia">Tecnologia</option>
+          <option value={new Boolean(true)}>Publicados</option>
+          <option value={new Boolean(false)}>Não Publicados</option>
         </select>
         <hr />
         <ul className="list-group">
           {professionals
-            // .filter((service) => {
-            //   if(service.category == selection || selection == "Todas") return service
+            // .filter((professional) => {
+            //   console.log(`${typeof selection} ${selection}\n ${typeof professional.published} ${professional.published}\n ${professional.published === selection}`)
+            //   if(professional.published === selection){
+            //     return professional
+            //   }
             // })
             .map((professional, index) => (
             <li
