@@ -201,12 +201,11 @@ const ProfessionalsList = () => {
         <hr />
         <ul className="list-group">
           {professionals
-            // .filter((professional) => {
-            //   console.log(`${typeof selection} ${selection}\n ${typeof professional.published} ${professional.published}\n ${professional.published === selection}`)
-            //   if(professional.published === selection){
-            //     return professional
-            //   }
-            // })
+            .filter((professional) => {
+              if(professional.published === selection){
+                return professional
+              }
+            })
             .map((professional, index) => (
             <li
               className={"list-group-item " + (index === currentIndex ? "active" : "")}
